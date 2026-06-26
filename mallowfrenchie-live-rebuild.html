@@ -1500,9 +1500,10 @@
     start: 'top 75%',
     once: true,
     onEnter() {
-      els.forEach((el, i) => {
-        el.style.animationDuration = '0.6s';
-        el.style.animationDelay   = `${i * 0.045}s`;
+      const randomOrder = shuffle(els);
+      randomOrder.forEach((el, i) => {
+        el.style.animationDuration = '0.45s';
+        el.style.animationDelay   = `${i * 0.012}s`;
         el.classList.add('popped');
       });
       gsap.to(ctaCard, {
