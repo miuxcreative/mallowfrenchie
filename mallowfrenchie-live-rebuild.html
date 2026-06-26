@@ -1470,18 +1470,26 @@
   });
 })();
 
-/* ── LOGO GRID stagger ───────────────────────────────── */
-gsap.to('.logo-cell', {
-  opacity: 1,
-  y: 0,
-  duration: 0.5,
-  ease: 'power2.out',
-  stagger: 0.04,
-  scrollTrigger: {
-    trigger: '.logo-grid',
-    start: 'top 85%',
-  }
-});
+/* ── LOGO GRID stagger — each logo from a different direction ── */
+(function () {
+  const dirs = [
+    { x:  0,  y: -20 },
+    { x: 20,  y:   0 },
+    { x:  0,  y:  20 },
+    { x: -20, y:   0 },
+  ];
+  document.querySelectorAll('.logo-cell').forEach((el, i) => {
+    const d = dirs[i % dirs.length];
+    gsap.set(el, { opacity: 0, x: d.x, y: d.y });
+    gsap.to(el, {
+      opacity: 1, x: 0, y: 0,
+      duration: 0.55,
+      ease: 'power2.out',
+      delay: (i % 10) * 0.055,
+      scrollTrigger: { trigger: '.logo-grid', start: 'top 85%' },
+    });
+  });
+})();
 </script>
 
 </body>
