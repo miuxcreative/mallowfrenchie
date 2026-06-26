@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mallow Frenchie – Miami's favorite famous frenchie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink:       #191919;
+    --ink-mid:   #6b6b6b;
+    --ink-light: #b0b0b0;
+    --white:     #ffffff;
+    --blush:     #faf0f0;
+    --blush-dark:#f5e5e5;
+    --pink-dot:  #e04d80;
+    --placeholder: #e2e2e2;
+    --placeholder-dark: #c8c8c8;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--white);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ─────────────────────────────────────── */
+  .hero {
+    position: relative;
+    height: 112vh;
+    min-height: 760px;
+    background: var(--white);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .hero-nav {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 48px;
+    z-index: 10;
+  }
+
+  .hero-logo {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .hero-cta {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .hero-center {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 48px 0;
+    gap: 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-eyebrow {
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    color: var(--ink-mid);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .hero-name {
+    font-size: clamp(52px, 6vw, 80px);
+    font-weight: 300;
+    color: var(--ink);
+    text-align: center;
+    line-height: 1.05;
+    margin-bottom: 40px;
+  }
+
+  /* ── FAN CARDS ──────────────────────────────────── */
+  .hero-cards {
+    position: relative;
+    width: min(520px, 50vw);
+    height: min(72vh, 660px);
+    flex-shrink: 0;
+    cursor: pointer;
+    z-index: 2; /* sits above the marquee */
+  }
+
+  .card {
+    position: absolute;
+    width: calc(min(520px, 50vw) - 60px);
+    height: calc(min(72vh, 660px) - 60px);
+    border-radius: 24px;
+    top: 30px;
+    left: 30px;
+    box-shadow: 0 10px 48px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.06);
+    transition: transform 0.55s cubic-bezier(0.34, 1.3, 0.64, 1),
+                box-shadow 0.55s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(0,0,0,0.22);
+  }
+
+  /* Resting: stacked deck */
+  .card-1 {
+    background: #f2d0dc;
+    z-index: 1;
+    transform: rotate(-7deg) translate(-14px, 10px);
+    animation: flyIn1 0.75s cubic-bezier(0.34, 1.5, 0.64, 1) 0.05s both;
+  }
+  .card-2 {
+    background: #e6d5b8;
+    z-index: 2;
+    transform: rotate(5deg) translate(16px, -6px);
+    animation: flyIn2 0.75s cubic-bezier(0.34, 1.5, 0.64, 1) 0.2s both;
+  }
+  .card-3 {
+    background: #c4dde8;
+    z-index: 3;
+    transform: rotate(-1deg);
+    animation: flyIn3 0.75s cubic-bezier(0.34, 1.5, 0.64, 1) 0.35s both;
+  }
+
+  /* Fly-in animations — each ends at its resting transform */
+  @keyframes flyIn1 {
+    from { opacity: 0; transform: rotate(-7deg) translate(-14px, 10px) translateY(140px) scale(0.82); }
+    to   { opacity: 1; transform: rotate(-7deg) translate(-14px, 10px); }
+  }
+  @keyframes flyIn2 {
+    from { opacity: 0; transform: rotate(5deg) translate(16px, -6px) translateY(140px) scale(0.82); }
+    to   { opacity: 1; transform: rotate(5deg) translate(16px, -6px); }
+  }
+  @keyframes flyIn3 {
+    from { opacity: 0; transform: rotate(-1deg) translateY(140px) scale(0.82); }
+    to   { opacity: 1; transform: rotate(-1deg); }
+  }
+
+  /* Fan + tilt handled by JS */
+  .card { will-change: transform; }
+
+  .hero-bottom {
+    position: absolute;
+    top: 65%;
+    transform: translateY(-50%);
+    left: 0;
+    right: 0;
+    z-index: 1;
+  }
+
+  .hero-corner-left {
+    position: absolute;
+    top: -56px;
+    left: 48px;
+    z-index: 10;
+  }
+
+  .hero-corner-left p {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink);
+    line-height: 1.7;
+  }
+
+  .hero-social {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .hero-social svg {
+    width: 11px;
+    height: 11px;
+    flex-shrink: 0;
+    opacity: 0.7;
+  }
+
+  /* Marquee strip */
+  .marquee-wrap {
+    width: 100%;
+    overflow: hidden;
+    line-height: 1;
+    user-select: none;
+  }
+
+  .marquee-track {
+    display: flex;
+    white-space: nowrap;
+    animation: marquee 18s linear infinite;
+  }
+
+  .marquee-item {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    padding-right: 24px;
+  }
+
+  .marquee-word {
+    font-size: clamp(120px, 14vw, 190px);
+    font-weight: 200;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+
+  .marquee-dot {
+    font-size: 48px;
+    font-weight: 200;
+    color: var(--pink-dot);
+    margin: 0 20px;
+    align-self: center;
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* ── ABOUT ────────────────────────────────────── */
+  .about {
+    background: var(--white);
+    padding: 100px 48px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .about-para {
+    max-width: 860px;
+    font-size: clamp(26px, 3.2vw, 40px);
+    font-weight: 300;
+    line-height: 1.45;
+    text-align: center;
+    color: var(--ink);
+  }
+
+  .about-para strong {
+    font-weight: 700;
+  }
+
+  /* Inline image pills */
+  .inline-pill {
+    display: inline-block;
+    width: 80px;
+    height: 52px;
+    border-radius: 999px;
+    vertical-align: middle;
+    margin: 0 6px -4px;
+    transform: scale(0);
+    flex-shrink: 0;
+  }
+
+  /* Word-split spans for GSAP stagger */
+  .word {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+  }
+  .word-inner {
+    display: inline-block;
+  }
+
+  .about-stats {
+    display: flex;
+    gap: 0;
+    margin-top: 120px;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 56px;
+    border-right: 1px solid rgba(0,0,0,0.10);
+  }
+  .stat:first-child { padding-left: 0; }
+  .stat:last-child  { border-right: none; }
+
+  .stat-year {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 6px;
+  }
+
+  .stat-num {
+    font-size: clamp(28px, 3.2vw, 44px);
+    font-weight: 700;
+    line-height: 1.05;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+  }
+
+  .stat-label {
+    font-size: clamp(11px, 1vw, 12px);
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+    margin-top: 5px;
+  }
+
+  .stat-sub {
+    display: none;
+  }
+
+  /* ── PHOTO CAROUSEL ──────────────────────────── */
+  .photo-carousel { background: var(--white); }
+
+  .carousel-pin-wrap {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    background: var(--white);
+    user-select: none;
+  }
+
+  /* Stage fills the pin — cards absolutely positioned inside */
+  .carousel-stage {
+    position: absolute;
+    inset: 0;
+  }
+
+  .c-wrap {
+    position: absolute;
+    top: 50%;
+    /* transform set by JS: translate(x, -50%) */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    will-change: transform, width;
+  }
+
+  .c-card {
+    border-radius: 14px;
+    /* width + height set by JS */
+    flex-shrink: 0;
+  }
+
+  .c-label {
+    margin-top: 12px;
+    white-space: nowrap;
+    font-size: 11px;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    line-height: 1;
+    overflow: hidden;
+  }
+  .c-label-name { font-weight: 700; color: var(--ink); margin-right: 7px; }
+  .c-label-desc { font-weight: 400; color: var(--ink-mid); }
+
+  /* waveform indicator */
+  .carousel-waveform {
+    position: absolute;
+    bottom: 48px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    height: 36px;
+    z-index: 2;
+  }
+  .wv-bar {
+    width: 2px;
+    border-radius: 999px;
+    background: rgba(0,0,0,0.12);
+    flex-shrink: 0;
+    transition: background 0.15s ease;
+  }
+  .wv-bar.wv-active     { background: rgba(0,0,0,0.78); }
+  .wv-bar.wv-active-adj { background: rgba(0,0,0,0.30); }
+
+  /* ── SERVICES ─────────────────────────────────── */
+  .services {
+    background: var(--white);
+    padding: 24px 120px 80px;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .svc-card {
+    background: var(--blush);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 32px 28px 36px;
+    gap: 0;
+  }
+
+  .svc-pill-img {
+    width: 100%;
+    height: 200px;
+    border-radius: 999px;
+    background: var(--placeholder-dark, #d8d8d8);
+    margin-bottom: 28px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(0,0,0,0.2);
+  }
+
+  .svc-num {
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--ink-light);
+    letter-spacing: 0.08em;
+    margin-bottom: 12px;
+  }
+
+  .svc-title {
+    font-size: clamp(18px, 1.8vw, 22px);
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.25;
+    margin-bottom: 12px;
+  }
+
+  .svc-desc {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--ink-mid);
+    line-height: 1.65;
+    flex: 1;
+  }
+
+  .svc-tags {
+    margin-top: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    align-items: center;
+  }
+
+  .svc-tag {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--pink-dot);
+  }
+
+  .svc-tag + .svc-tag::before {
+    content: ' · ';
+    color: var(--pink-dot);
+  }
+
+  /* ── PHOTO GRID ───────────────────────────────── */
+  .photo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 360px 480px;
+    gap: 2px;
+    background: #ddd;
+  }
+
+  .photo-cell {
+    background: var(--placeholder);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-light);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .photo-cell:nth-child(1) { background: #d8d0cc; }
+  .photo-cell:nth-child(2) { background: #cad0d4; }
+  .photo-cell:nth-child(3) { background: #d0ccd8; }
+  .photo-cell:nth-child(4) { background: #c8c4cc; }
+  .photo-cell:nth-child(5) { background: #c4ccd0; }
+  .photo-cell:nth-child(6) { background: #ccc8d0; }
+
+  /* ── PRESS ────────────────────────────────────── */
+  .press {
+    background: var(--white);
+    padding: 100px 120px 80px;
+  }
+
+  .press-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--pink-dot);
+    margin-bottom: 32px;
+    display: block;
+  }
+
+  .press-list {
+    list-style: none;
+  }
+
+  .press-row {
+    display: grid;
+    grid-template-columns: 220px 1fr auto;
+    align-items: center;
+    gap: 40px;
+    padding: 28px 0;
+    border-bottom: 1px solid #e8e8e8;
+    transition: opacity 0.2s;
+  }
+
+  .press-row:first-child { border-top: 1px solid #e8e8e8; }
+
+  .press-row[data-preview]:not([data-preview=""]) { cursor: none; }
+  .press-row .press-link { cursor: pointer; }
+
+  .press-pub {
+    font-size: clamp(16px, 1.5vw, 20px);
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .press-detail {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--ink-mid);
+    line-height: 1.55;
+  }
+
+  .press-links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+
+  .press-link {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--pink-dot);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: opacity 0.15s;
+  }
+
+  .press-link:hover { opacity: 0.6; }
+
+  /* Cursor-following preview */
+  #press-preview {
+    position: fixed;
+    width: 360px;
+    height: 180px; /* 16:8 = 2:1 */
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 16px 48px rgba(0,0,0,0.2);
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0;
+    transform: scale(0.9) translateY(8px);
+    transition: opacity 0.15s ease, transform 0.15s ease;
+    top: 0; left: 0;
+    will-change: transform;
+  }
+
+  #press-preview.visible {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+
+  .preview-inner {
+    width: 100%; height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: rgba(255,255,255,0.7);
+  }
+
+  /* ── PARTNERSHIPS ─────────────────────────────── */
+  .partnerships {
+    background: var(--white);
+    padding: 80px 120px 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .partnerships-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-mid);
+    margin-bottom: 48px;
+  }
+
+  .logo-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 200px);
+    gap: 16px;
+    justify-content: center;
+  }
+
+  .logo-cell {
+    background: #f0f0f0;
+    border-radius: 8px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--ink-light);
+    text-align: center;
+    padding: 0 12px;
+  }
+
+  /* ── STICKER FOOTER ──────────────────────────── */
+  .sticker-footer {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: var(--blush);
+  }
+
+  .sticker {
+    position: absolute;
+    transform: scale(0) rotate(0deg);
+    opacity: 0;
+    border-radius: 20px;
+    will-change: transform, opacity;
+  }
+
+  /* ── CTA CARD ─────────────────────────────────── */
+  .cta-card {
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%) translateY(120px);
+    opacity: 0;
+    background: var(--white);
+    border-radius: 28px;
+    padding: 52px 72px;
+    text-align: center;
+    box-shadow: 0 32px 100px rgba(0,0,0,0.18);
+    width: min(520px, 90vw);
+    z-index: 10;
+    will-change: transform, opacity;
+  }
+
+  .cta-card-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-bottom: 14px;
+  }
+
+  .cta-card h2 {
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.1;
+    margin-bottom: 32px;
+    letter-spacing: -0.02em;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+  }
+
+  .cta-btn-primary {
+    background: var(--pink);
+    color: #fff;
+    padding: 14px 36px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .cta-btn-primary:hover { opacity: 0.85; }
+
+  .cta-btn-secondary {
+    background: transparent;
+    color: var(--ink);
+    padding: 14px 36px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1.5px solid rgba(0,0,0,0.14);
+    transition: border-color 0.2s;
+  }
+  .cta-btn-secondary:hover { border-color: var(--pink); color: var(--pink); }
+
+  /* ── FOOTER STRIP ─────────────────────────────── */
+  footer {
+    background: var(--white);
+    border-top: 1px solid rgba(0,0,0,0.08);
+    padding: 24px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-logo {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+
+  .footer-credits {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--ink-mid);
+  }
+
+  .footer-credits a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+
+  .footer-handle {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+</style>
+</head>
+<body>
+
+<!-- ── HERO ──────────────────────────────────────────── -->
+<section class="hero">
+  <nav class="hero-nav">
+    <a href="#" class="hero-logo">Mallow Frenchie</a>
+    <a href="mailto:mallowfrenchie@gmail.com" class="hero-cta">Contact My Agent</a>
+  </nav>
+
+  <div class="hero-center">
+    <p class="hero-eyebrow">· Hello My Name Is ·</p>
+    <h1 class="hero-name">Mallow Frenchie</h1>
+    <div class="hero-cards">
+      <div class="card card-1">Photo</div>
+      <div class="card card-2">Photo</div>
+      <div class="card card-3">Photo</div>
+    </div>
+  </div>
+
+  <div class="hero-bottom">
+    <div class="hero-corner-left">
+      <p>Miami's Favorite Famous Frenchie</p>
+      <p class="hero-social">
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+        </svg>
+        <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+        </svg>
+        @MallowFrenchie
+      </p>
+    </div>
+
+    <div class="marquee-wrap">
+      <div class="marquee-track">
+        <!-- duplicated for seamless loop -->
+        <div class="marquee-item">
+          <span class="marquee-word">MIAMI'S #1 FRENCHIE</span>
+          <span class="marquee-dot">·</span>
+        </div>
+        <div class="marquee-item">
+          <span class="marquee-word">MIAMI'S #1 FRENCHIE</span>
+          <span class="marquee-dot">·</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ABOUT ──────────────────────────────────────────── -->
+<section class="about">
+  <p class="about-para" id="about-para">
+    I am a <strong>3x Forbes</strong> featured <strong>French Bulldog</strong> in
+    <strong>Miami</strong><span class="inline-pill" style="background:#f2d0dc;"></span>who loves <strong>staycations</strong>, hugs 'n kisses,
+    and being pampered!<span class="inline-pill" style="background:#e6d5b8;"></span>Usually on a quest for snacks, with my happy smile and sweet
+    personality.<span class="inline-pill" style="background:#c4dde8;"></span>I love working with <strong>pet friendly brands</strong> and sharing
+    fun finds with my followers.
+  </p>
+  <div class="about-stats">
+    <div class="stat">
+      <span class="stat-year">2018 · 2019 · 2022</span>
+      <span class="stat-num">Forbes Featured</span>
+      <span class="stat-label">3× Times</span>
+    </div>
+    <div class="stat">
+      <span class="stat-year">2025</span>
+      <span class="stat-num">Gala Honoree</span>
+      <span class="stat-label">Paws 4 You</span>
+    </div>
+    <div class="stat">
+      <span class="stat-year">2024</span>
+      <span class="stat-num">Campaign Winner</span>
+      <span class="stat-label">Toyota Pet-Influencer</span>
+    </div>
+    <div class="stat">
+      <span class="stat-year">2025</span>
+      <span class="stat-num">NY Times Square</span>
+      <span class="stat-label">Billboard Feature</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICES ───────────────────────────────────────── -->
+<section class="services">
+  <div class="services-grid">
+    <div class="svc-card">
+      <div class="svc-pill-img">Photo</div>
+      <span class="svc-num">01</span>
+      <p class="svc-title">Brand Partnerships</p>
+      <p class="svc-desc">Product launches, sponsored content, long-term ambassador roles. From Disney to BMW — Mallow has the credibility and the cuteness.</p>
+      <div class="svc-tags">
+        <span class="svc-tag">Instagram</span>
+        <span class="svc-tag">UGC</span>
+      </div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-pill-img">Photo</div>
+      <span class="svc-num">02</span>
+      <p class="svc-title">Hotels &amp; Staycations</p>
+      <p class="svc-desc">Pet-friendly hotel reviews and luxury travel content. Nobu, Eden Roc, Kimpton, Marriott — Mallow has stayed and posted from the best.</p>
+      <div class="svc-tags">
+        <span class="svc-tag">Pet Travel</span>
+        <span class="svc-tag">Hotel Reviews</span>
+      </div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-pill-img">Photo</div>
+      <span class="svc-num">03</span>
+      <p class="svc-title">In-Person Appearances</p>
+      <p class="svc-desc">Galas, grand openings, brand activations. Host of Maman Yappy Hour. 2025 Gala Honoree. Winner of Toyota's 2024 Pet-Influencer Campaign.</p>
+      <div class="svc-tags">
+        <span class="svc-tag">Events</span>
+        <span class="svc-tag">Activations</span>
+        <span class="svc-tag">Press</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PHOTO CAROUSEL ────────────────────────────────── -->
+<section class="photo-carousel" id="photo-carousel">
+  <div class="carousel-pin-wrap" id="carousel-pin">
+    <div class="carousel-stage" id="carousel-stage">
+      <div class="c-wrap">
+        <div class="c-card" style="background:#f2d0dc;" data-h="610"></div>
+        <div class="c-label"><span class="c-label-name">Mallow</span><span class="c-label-desc">Beach Day</span></div>
+      </div>
+      <div class="c-wrap">
+        <div class="c-card" style="background:#e6d5b8;" data-h="550"></div>
+        <div class="c-label"><span class="c-label-name">Forbes</span><span class="c-label-desc">Featured</span></div>
+      </div>
+      <div class="c-wrap">
+        <div class="c-card" style="background:#c4dde8;" data-h="640"></div>
+        <div class="c-label"><span class="c-label-name">Toyota</span><span class="c-label-desc">Campaign</span></div>
+      </div>
+      <div class="c-wrap">
+        <div class="c-card" style="background:#f9c8d4;" data-h="580"></div>
+        <div class="c-label"><span class="c-label-name">Times Square</span><span class="c-label-desc">Billboard</span></div>
+      </div>
+      <div class="c-wrap">
+        <div class="c-card" style="background:#d5e8c4;" data-h="660"></div>
+        <div class="c-label"><span class="c-label-name">Paws 4 You</span><span class="c-label-desc">Gala 2025</span></div>
+      </div>
+      <div class="c-wrap">
+        <div class="c-card" style="background:#e8c4d5;" data-h="595"></div>
+        <div class="c-label"><span class="c-label-name">Miami</span><span class="c-label-desc">Life</span></div>
+      </div>
+      <div class="c-wrap">
+        <div class="c-card" style="background:#c4c8e8;" data-h="620"></div>
+        <div class="c-label"><span class="c-label-name">Maman</span><span class="c-label-desc">Yappy Hour</span></div>
+      </div>
+      <div class="c-wrap">
+        <div class="c-card" style="background:#f9e0c8;" data-h="565"></div>
+        <div class="c-label"><span class="c-label-name">Frenchie</span><span class="c-label-desc">Moments</span></div>
+      </div>
+      <div class="c-wrap">
+        <div class="c-card" style="background:#f2c4c4;" data-h="640"></div>
+        <div class="c-label"><span class="c-label-name">Mallow</span><span class="c-label-desc">Friends</span></div>
+      </div>
+    </div>
+    <div class="carousel-waveform" id="carousel-waveform"></div>
+  </div>
+</section>
+
+<!-- ── PRESS ──────────────────────────────────────────── -->
+<section class="press">
+  <span class="press-eyebrow">As Seen In</span>
+  <ul class="press-list">
+
+    <li class="press-row" data-preview="forbes" data-color="#1a1a2e">
+      <span class="press-pub">Forbes</span>
+      <span class="press-detail">Featured three times — pet-friendly luxury travel, hotel amenities, and Miami's top pet influencers.</span>
+      <div class="press-links">
+        <a class="press-link" href="https://www.forbes.com/sites/amydobson/2018/10/23/flying-car-landing-pads-are-just-one-of-the-latest-trends-in-luxury-amenities/" target="_blank" rel="noopener">2018 ↗</a>
+        <a class="press-link" href="https://www.forbes.com/sites/keithflamer/2019/01/29/oceana-bal-harbours-new-pet-spa-pampers-posh-pups/" target="_blank" rel="noopener">2019 ↗</a>
+        <a class="press-link" href="https://www.forbes.com/sites/larryolmsted/2022/05/11/pet-friendly-vacations-traveling-with-your-dog-just-got-easier/" target="_blank" rel="noopener">2022 ↗</a>
+      </div>
+    </li>
+
+    <li class="press-row" data-preview="deco" data-color="#1e3a5f">
+      <span class="press-pub">Deco Drive</span>
+      <span class="press-detail">WSVN feature on South Florida's most pampered pets and the brands that love them.</span>
+      <div class="press-links">
+        <a class="press-link" href="https://wsvn.com/entertainment/barkin-and-dinin-special-programs-and-events-give-soflo-dogs-some-tlc/" target="_blank" rel="noopener">Watch ↗</a>
+      </div>
+    </li>
+
+    <li class="press-row" data-preview="haute" data-color="#5a1a2a">
+      <span class="press-pub">Haute Living</span>
+      <span class="press-detail">Paws4Yous Mardi Paws 2025 Gala — Mallow honored for community impact and rescue advocacy.</span>
+      <div class="press-links">
+        <a class="press-link" href="https://hauteliving.com/2025/03/paws4yous-mardi-paws-2025-gala-unites-south-florida-to-support-pet-rescue-and-save-at-risk-animals/766117/" target="_blank" rel="noopener">Read ↗</a>
+      </div>
+    </li>
+
+    <li class="press-row" data-preview="adweek" data-color="#1a3a1a">
+      <span class="press-pub">AdWeek</span>
+      <span class="press-detail">Kimpton Hotels' Wag! pet travel campaign — Mallow as lead ambassador.</span>
+      <div class="press-links">
+        <a class="press-link" href="https://www.adweek.com/brand-marketing/kimpton-hotels-wag-traveling-pets/" target="_blank" rel="noopener">Read ↗</a>
+      </div>
+    </li>
+
+    <li class="press-row" data-preview="newtimes" data-color="#2e1a0e">
+      <span class="press-pub">Miami New Times</span>
+      <span class="press-detail">Named one of Miami's most popular pet influencers.</span>
+      <div class="press-links">
+        <a class="press-link" href="https://www.miaminewtimes.com/arts/seven-of-miamis-most-popular-pet-influencers-10826440" target="_blank" rel="noopener">Read ↗</a>
+      </div>
+    </li>
+
+    <li class="press-row" data-preview="resident" data-color="#2e2e1a">
+      <span class="press-pub">Resident Magazine</span>
+      <span class="press-detail">Mardi Paws Gala 2025 — South Florida's biggest pet rescue event of the year.</span>
+      <div class="press-links">
+        <a class="press-link" href="https://resident.com/events/2025/03/17/paws4yous-mardi-paws-gala-2025-unleashes-generosity-in-miami" target="_blank" rel="noopener">Read ↗</a>
+      </div>
+    </li>
+
+  </ul>
+</section>
+
+<!-- Cursor preview -->
+<div id="press-preview">
+  <div class="preview-inner" id="press-preview-label"></div>
+</div>
+
+<!-- ── PARTNERSHIPS ───────────────────────────────────── -->
+<section class="partnerships">
+  <p class="partnerships-label">Our Partnerships</p>
+  <div class="logo-grid">
+    <div class="logo-cell">Miami Marlins</div>
+    <div class="logo-cell">PetSupermarket</div>
+    <div class="logo-cell">Brightline</div>
+    <div class="logo-cell">Amazon</div>
+    <div class="logo-cell">Disney</div>
+    <div class="logo-cell">SOBEWFF</div>
+    <div class="logo-cell">Lull</div>
+    <div class="logo-cell">Palm Beach Boat Show</div>
+    <div class="logo-cell">Bing</div>
+    <div class="logo-cell">BMW</div>
+    <div class="logo-cell">Toyota</div>
+    <div class="logo-cell">MINI</div>
+    <div class="logo-cell">City of Miami</div>
+    <div class="logo-cell">BARK BOX</div>
+    <div class="logo-cell">NutraVet</div>
+  </div>
+</section>
+
+<!-- ── STICKER FOOTER ─────────────────────────────────── -->
+<section class="sticker-footer" id="sticker-footer">
+  <!-- stickers injected by JS -->
+  <div class="cta-card" id="cta-card">
+    <p class="cta-card-eyebrow">Let's work together</p>
+    <h2>Ready to make something unforgettable?</h2>
+    <div class="cta-buttons">
+      <a href="mailto:hello@mallowfrenchie.com" class="cta-btn-primary">Book Me</a>
+      <a href="#contact" class="cta-btn-secondary">Contact</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER STRIP ───────────────────────────────────── -->
+<footer>
+  <span class="footer-logo">MallowFrenchie</span>
+  <p class="footer-credits">
+    Design &amp; built by <a href="https://www.miuxcreative.com" target="_blank">MIUX Creative</a>
+    · Powered by <a href="http://www.g-space.agency" target="_blank">G-Space Agency</a>
+  </p>
+  <p class="footer-handle">@mallowfrenchie</p>
+</footer>
+
+<script>
+  /* ── PRESS: cursor-following preview ─────────── */
+  const preview     = document.getElementById('press-preview');
+  const previewLabel = document.getElementById('press-preview-label');
+  let mouseX = 0, mouseY = 0;
+  let rafId = null;
+
+  document.addEventListener('mousemove', e => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    if (preview.classList.contains('visible')) {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        preview.style.left = (mouseX + 20) + 'px';
+        preview.style.top  = (mouseY - 90) + 'px';
+      });
+    }
+  });
+
+  document.querySelectorAll('.press-row[data-preview]').forEach(row => {
+    row.addEventListener('mouseenter', () => {
+      const color = row.dataset.color || '#1a1a1a';
+      const pub   = row.querySelector('.press-pub').textContent;
+      preview.querySelector('.preview-inner').style.background = color;
+      previewLabel.textContent = pub;
+      preview.style.left = (mouseX + 20) + 'px';
+      preview.style.top  = (mouseY - 90) + 'px';
+      preview.classList.add('visible');
+    });
+    row.addEventListener('mouseleave', () => {
+      preview.classList.remove('visible');
+    });
+
+    row.querySelectorAll('.press-link').forEach(link => {
+      link.addEventListener('mouseenter', () => preview.classList.remove('visible'));
+      link.addEventListener('mouseleave', () => preview.classList.add('visible'));
+    });
+  });
+</script>
+
+<script>
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* ── HERO TEXT reveal on load ─────────────────── */
+  gsap.from('.hero-eyebrow', {
+    opacity: 0, y: 16, duration: 0.8, ease: 'power3.out', delay: 0.2
+  });
+  gsap.from('.hero-name', {
+    opacity: 0, y: 28, duration: 1, ease: 'power3.out', delay: 0.4
+  });
+
+  /* ── ABOUT: word-by-word reveal ──────────────── */
+  // Split paragraph into word spans preserving inline-pills and strong tags
+  function splitWords(el) {
+    // Walk child nodes, wrap text-node words in spans, leave element nodes alone
+    const nodes = [...el.childNodes];
+    el.innerHTML = '';
+    nodes.forEach(node => {
+      if (node.nodeType === Node.TEXT_NODE) {
+        node.textContent.split(/(\s+)/).forEach(token => {
+          if (/^\s+$/.test(token)) {
+            el.appendChild(document.createTextNode(token));
+          } else if (token) {
+            const w = document.createElement('span');
+            w.className = 'word';
+            const inner = document.createElement('span');
+            inner.className = 'word-inner';
+            inner.textContent = token;
+            w.appendChild(inner);
+            el.appendChild(w);
+          }
+        });
+      } else if (node.nodeType === Node.ELEMENT_NODE) {
+        if (node.tagName === 'STRONG') {
+          // Wrap strong's text words too
+          const words = node.textContent.split(/(\s+)/);
+          words.forEach(token => {
+            if (/^\s+$/.test(token)) {
+              el.appendChild(document.createTextNode(token));
+            } else if (token) {
+              const w = document.createElement('span');
+              w.className = 'word';
+              const inner = document.createElement('span');
+              inner.className = 'word-inner';
+              const s = document.createElement('strong');
+              s.textContent = token;
+              inner.appendChild(s);
+              w.appendChild(inner);
+              el.appendChild(w);
+            }
+          });
+        } else {
+          // inline-pill or other element — leave as-is
+          el.appendChild(node);
+        }
+      }
+    });
+  }
+
+  const para = document.getElementById('about-para');
+  splitWords(para);
+
+  gsap.from('#about-para .word-inner', {
+    scrollTrigger: { trigger: '#about-para', start: 'top 80%' },
+    y: '100%',
+    opacity: 0,
+    duration: 0.55,
+    ease: 'power3.out',
+    stagger: 0.025
+  });
+
+  /* ── ABOUT: inline pills expand ──────────────── */
+  gsap.to('.inline-pill', {
+    scrollTrigger: { trigger: '#about-para', start: 'top 75%' },
+    scale: 1,
+    duration: 0.7,
+    ease: 'back.out(2)',
+    stagger: 0.18,
+    delay: 0.3
+  });
+
+  /* ── STATS count-up ──────────────────────────── */
+  gsap.from('.stat-num', {
+    scrollTrigger: { trigger: '.about-stats', start: 'top 85%' },
+    opacity: 0, y: 20, duration: 0.6, ease: 'power2.out', stagger: 0.12
+  });
+
+</script>
+
+<script>
+  const container = document.querySelector('.hero-cards');
+  const cards     = [...container.querySelectorAll('.card')];
+
+  const REST = [
+    'rotate(-7deg) translate(-14px, 10px)',
+    'rotate(5deg) translate(16px, -6px)',
+    'rotate(-1deg)'
+  ];
+  const FAN = [
+    'rotate(-15deg) translate(-180px, 10px)',
+    'rotate(0deg) translateY(-10px)',
+    'rotate(15deg) translate(180px, 10px)'
+  ];
+  const SHADOW_REST = '0 10px 48px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.06)';
+  const SHADOW_FAN  = ['0 16px 48px rgba(0,0,0,0.13)', '0 20px 60px rgba(0,0,0,0.15)', '0 16px 48px rgba(0,0,0,0.13)'];
+
+  let fanned = false;
+
+  // After fly-in finishes, clear the animation so JS can own the transform
+  setTimeout(() => {
+    cards.forEach((card, i) => {
+      card.style.animation  = 'none';   // release fill-mode lock
+      card.style.opacity    = '1';
+      card.style.transition = 'transform 0.55s cubic-bezier(0.34,1.3,0.64,1), box-shadow 0.55s ease';
+      card.style.transform  = REST[i];
+    });
+  }, 1200);
+
+  container.addEventListener('mouseenter', () => {
+    fanned = true;
+    cards.forEach((card, i) => {
+      card.style.transform  = FAN[i];
+      card.style.boxShadow  = SHADOW_FAN[i];
+    });
+  });
+
+  container.addEventListener('mouseleave', () => {
+    fanned = false;
+    cards.forEach((card, i) => {
+      card.style.transform = REST[i];
+      card.style.boxShadow = SHADOW_REST;
+    });
+  });
+
+  // Per-card 3D tilt when fanned
+  cards.forEach((card, i) => {
+    card.addEventListener('mousemove', (e) => {
+      if (!fanned) return;
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left)  / rect.width  - 0.5; // -0.5 → 0.5
+      const y = (e.clientY - rect.top)   / rect.height - 0.5;
+      const tiltX = -y * 18;
+      const tiltY =  x * 18;
+      card.style.transition = 'box-shadow 0.3s ease';
+      card.style.transform  = `${FAN[i]} perspective(700px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(1.04)`;
+      card.style.boxShadow  = `0 ${24 + Math.abs(tiltX)}px 64px rgba(0,0,0,0.18)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      if (!fanned) return;
+      card.style.transition = 'transform 0.45s cubic-bezier(0.34,1.3,0.64,1), box-shadow 0.45s ease';
+      card.style.transform  = FAN[i];
+      card.style.boxShadow  = SHADOW_FAN[i];
+    });
+  });
+</script>
+
+<script>
+/* ── PHOTO CAROUSEL ─────────────────────────────────── */
+(function () {
+  const section  = document.getElementById('photo-carousel');
+  const pin      = document.getElementById('carousel-pin');
+  const stage    = document.getElementById('carousel-stage');
+  const waveform = document.getElementById('carousel-waveform');
+  const wraps    = [...stage.querySelectorAll('.c-wrap')];
+  const N        = wraps.length;
+
+  const BASE_W = 480;
+  const BASE_H = wraps.map(w => parseInt(w.querySelector('.c-card').dataset.h));
+  const GAP    = 22;
+
+  function scaleFor(dist) {
+    return Math.max(0.055, Math.pow(0.55, Math.abs(dist)));
+  }
+
+  function layout(centerFloat) {
+    const vw     = window.innerWidth;
+    const scales = wraps.map((_, i) => scaleFor(i - centerFloat));
+
+    // cumulative left positions
+    const pos = [];
+    let cx = 0;
+    scales.forEach((s, i) => {
+      const w = BASE_W * s;
+      pos.push({ x: cx, w, h: BASE_H[i] * s });
+      cx += w + GAP;
+    });
+
+    // smooth center interpolation
+    const ci   = Math.min(N - 2, Math.floor(centerFloat));
+    const frac = centerFloat - ci;
+    const midA = pos[ci].x + pos[ci].w / 2;
+    const midB = pos[ci + 1].x + pos[ci + 1].w / 2;
+    const offsetX = vw / 2 - (midA + frac * (midB - midA));
+
+    wraps.forEach((wrap, i) => {
+      const p    = pos[i];
+      const card = wrap.querySelector('.c-card');
+      const w    = Math.round(p.w);
+      const h    = Math.round(p.h);
+      wrap.style.transform = `translate(${Math.round(p.x + offsetX)}px, -50%)`;
+      wrap.style.width     = w + 'px';
+      card.style.width     = w + 'px';
+      card.style.height    = h + 'px';
+    });
+  }
+
+  // ── Waveform ──────────────────────────────────────────
+  const BAR_COUNT = 22;
+  const wvBars = [];
+  for (let i = 0; i < BAR_COUNT; i++) {
+    const t = (i - BAR_COUNT / 2) / (BAR_COUNT / 5);
+    const h = Math.max(3, Math.round(28 * Math.exp(-0.5 * t * t)));
+    const b = document.createElement('div');
+    b.className = 'wv-bar';
+    b.style.height = h + 'px';
+    waveform.appendChild(b);
+    wvBars.push(b);
+  }
+
+  function updateWaveform(progress) {
+    const active = Math.round(progress * (BAR_COUNT - 1));
+    wvBars.forEach((b, i) => {
+      b.classList.remove('wv-active', 'wv-active-adj');
+      if (i === active)                    b.classList.add('wv-active');
+      else if (Math.abs(i - active) === 1) b.classList.add('wv-active-adj');
+    });
+  }
+
+  // ── ScrollTrigger pin + scrub ─────────────────────────
+  const SCROLL_DIST = 3200;
+
+  layout(0);
+  updateWaveform(0);
+
+  ScrollTrigger.create({
+    trigger: section,
+    start: 'top top',
+    end: `+=${SCROLL_DIST}`,
+    pin: pin,
+    anticipatePin: 1,
+    scrub: 1.2,
+    onUpdate(self) {
+      layout(self.progress * (N - 1));
+      updateWaveform(self.progress);
+    },
+  });
+})();
+
+/* ── STICKER FOOTER ──────────────────────────────────── */
+(function () {
+  const section = document.getElementById('sticker-footer');
+  const ctaCard = document.getElementById('cta-card');
+
+  // Placeholder sticker configs — swap src for real images later
+  // Shape variants: circle, pill-h, pill-v, rounded-square
+  const STICKERS = [
+    { w: 180, h: 180, r: 20, rot: -14, color: '#f2d0dc' },
+    { w: 220, h: 140, r: 999, rot: 8,  color: '#e6d5b8' },
+    { w: 130, h: 200, r: 999, rot: -6, color: '#c4dde8' },
+    { w: 160, h: 160, r: 999, rot: 22, color: '#f9c8d4' },
+    { w: 240, h: 150, r: 999, rot: -18,color: '#d5e8c4' },
+    { w: 150, h: 150, r: 28,  rot: 11, color: '#e8c4d5' },
+    { w: 200, h: 200, r: 999, rot: -3, color: '#c4c8e8' },
+    { w: 170, h: 110, r: 999, rot: 16, color: '#f2d0dc' },
+    { w: 120, h: 180, r: 999, rot: -25,color: '#e6d5b8' },
+    { w: 260, h: 160, r: 24,  rot: 7,  color: '#c4dde8' },
+    { w: 140, h: 140, r: 999, rot: -12,color: '#f9e0c8' },
+    { w: 190, h: 130, r: 999, rot: 20, color: '#d5c4e8' },
+    { w: 110, h: 170, r: 999, rot: -8, color: '#f2d0dc' },
+    { w: 230, h: 145, r: 999, rot: 14, color: '#c4e8d5' },
+    { w: 155, h: 155, r: 28,  rot: -20,color: '#e8d5c4' },
+    { w: 200, h: 120, r: 999, rot: 5,  color: '#c4dde8' },
+    { w: 175, h: 175, r: 999, rot: -16,color: '#f9c8d4' },
+    { w: 210, h: 135, r: 999, rot: 28, color: '#e6d5b8' },
+  ];
+
+  // Scatter with a simple grid + jitter to guarantee coverage
+  const cols = 5, rows = 4;
+  const cellW = () => section.offsetWidth  / cols;
+  const cellH = () => section.offsetHeight / rows;
+
+  STICKERS.forEach((s, i) => {
+    const el = document.createElement('div');
+    el.className = 'sticker';
+    const col = i % cols;
+    const row = Math.floor(i / cols) % rows;
+    // center of cell + jitter
+    const jx = (Math.random() - 0.5) * cellW() * 0.55;
+    const jy = (Math.random() - 0.5) * cellH() * 0.55;
+    el.style.cssText = `
+      width:${s.w}px; height:${s.h}px;
+      border-radius:${s.r}px;
+      background:${s.color};
+      left:${(col + 0.5) * (section.offsetWidth  / cols) + jx - s.w / 2}px;
+      top: ${(row + 0.5) * (section.offsetHeight / rows) + jy - s.h / 2}px;
+      --rot:${s.rot}deg;
+    `;
+    section.insertBefore(el, ctaCard);
+  });
+
+  // GSAP: stickers pop in on scroll, then CTA slides up
+  const tl = gsap.timeline({ paused: true });
+
+  tl.to('.sticker', {
+    scale: 1,
+    opacity: 1,
+    rotation: (i) => STICKERS[i % STICKERS.length].rot,
+    duration: 0.55,
+    ease: 'back.out(1.6)',
+    stagger: 0.06,
+  }).to(ctaCard, {
+    y: 0,
+    opacity: 1,
+    duration: 0.7,
+    ease: 'power3.out',
+  }, '-=0.1');
+
+  ScrollTrigger.create({
+    trigger: section,
+    start: 'top 75%',
+    onEnter: () => tl.play(),
+  });
+})();
+</script>
+
+</body>
+</html>
