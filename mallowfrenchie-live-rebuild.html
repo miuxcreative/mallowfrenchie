@@ -1441,29 +1441,46 @@
 
   const W = section.offsetWidth;
   const H = section.offsetHeight;
-  const N = 200;
 
-  // build a shuffled sequence long enough
-  let pool = shuffle(SRCS);
-  const seq = [];
-  while (seq.length < N) { pool = shuffle(SRCS); seq.push(...pool); }
+  // Layer 1: tight grid guarantees no bare background shows
+  const CELL = 220;
+  const cols = Math.ceil(W / CELL) + 1;
+  const rows = Math.ceil(H / CELL) + 1;
+  const gridEls = [];
+  let srcIdx = 0;
+  for (let r = 0; r < rows; r++) {
+    for (let c = 0; c < cols; c++) {
+      const sw  = CELL + Math.round(Math.random() * 60);
+      const rot = (Math.random() - 0.5) * 30;
+      const jx  = (Math.random() - 0.5) * 60;
+      const jy  = (Math.random() - 0.5) * 60;
+      const x   = c * CELL + jx;
+      const y   = Math.max(3 + sw / 2, r * CELL + jy);
+      const el  = document.createElement('img');
+      el.className = 'sticker';
+      el.src = SRCS[srcIdx++ % SRCS.length];
+      el.alt = '';
+      el.style.cssText = `width:${sw}px;height:${sw}px;left:${x}px;top:${y}px;--r:${rot}deg;`;
+      section.insertBefore(el, ctaCard);
+      gridEls.push(el);
+    }
+  }
 
-  const els = [];
-  for (let i = 0; i < N; i++) {
-    const scale = 0.6 + Math.random() * 1.8;   // 0.6× – 2.4×
-    const base  = 180;
-    const sw    = Math.round(base * scale);
-    const rot   = (Math.random() - 0.5) * 36;
+  // Layer 2: 80 extra scattered stickers at mixed sizes for depth
+  const extras = 80;
+  const els = [...gridEls];
+  for (let i = 0; i < extras; i++) {
+    const scale = 0.5 + Math.random() * 2.0;
+    const sw    = Math.round(180 * scale);
+    const rot   = (Math.random() - 0.5) * 40;
     const x     = Math.random() * (W + sw * 0.4) - sw * 0.2;
-    // top edge: sticker top must be >= 3px, so center (y) >= 3 + sw/2
     const minY  = 3 + sw / 2;
-    const y     = minY + Math.random() * (H + sw * 0.3 - minY);
-
-    const el = document.createElement('img');
+    const y     = minY + Math.random() * (H - minY + sw * 0.3);
+    const el    = document.createElement('img');
     el.className = 'sticker';
-    el.src = seq[i];
+    el.src = SRCS[i % SRCS.length];
     el.alt = '';
-    el.style.cssText = `width:${sw}px; height:${sw}px; left:${x}px; top:${y}px; --r:${rot}deg;`;
+    el.style.cssText = `width:${sw}px;height:${sw}px;left:${x}px;top:${y}px;--r:${rot}deg;`;
     section.insertBefore(el, ctaCard);
     els.push(el);
   }
