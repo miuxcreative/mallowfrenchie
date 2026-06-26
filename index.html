@@ -698,11 +698,22 @@
 
   .sticker {
     position: absolute;
-    transform: scale(0) rotate(0deg);
+    transform: translate(-50%, -50%) rotate(var(--r)) scale(0);
     opacity: 0;
     will-change: transform, opacity;
     object-fit: contain;
     pointer-events: none;
+    animation-fill-mode: both;
+    animation-timing-function: cubic-bezier(0.34, 1.5, 0.64, 1);
+  }
+  .sticker.popped {
+    animation-name: stickerPop;
+  }
+  @keyframes stickerPop {
+    0%   { transform: translate(-50%,-50%) rotate(var(--r)) scale(0);    opacity: 0; }
+    60%  { transform: translate(-50%,-50%) rotate(var(--r)) scale(1.12); opacity: 1; }
+    80%  { transform: translate(-50%,-50%) rotate(var(--r)) scale(0.96); }
+    100% { transform: translate(-50%,-50%) rotate(var(--r)) scale(1);    opacity: 1; }
   }
 
   /* ── CTA CARD ─────────────────────────────────── */
@@ -1404,7 +1415,7 @@
   const section = document.getElementById('sticker-footer');
   const ctaCard = document.getElementById('cta-card');
 
-  const STICKER_SRCS = [
+  const SRCS = [
     'assets/stickers/Rectangle.png',
     'assets/stickers/Rectangle-1.png',
     'assets/stickers/Rectangle-2.png',
@@ -1419,58 +1430,58 @@
     'assets/stickers/Rectangle-11.png',
   ];
 
-  const ROTATIONS = [-14, 8, -6, 22, -18, 11, -3, 16, -25, 7, -12, 20, -8, 14, -20, 5, -16, 28];
-  const SIZES     = [180, 200, 160, 220, 150, 190, 170, 210, 140, 200, 160, 180];
+  function shuffle(arr) {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
 
-  // Tile stickers across a grid with jitter so they fill the screen
-  const cols = 4, rows = 3;
-  const N_STICKERS = cols * rows;
+  const W = section.offsetWidth;
+  const H = section.offsetHeight;
+  const N = 32; // sticker density
 
-  for (let i = 0; i < N_STICKERS; i++) {
-    const src  = STICKER_SRCS[i % STICKER_SRCS.length];
-    const size = SIZES[i % SIZES.length];
-    const rot  = ROTATIONS[i % ROTATIONS.length];
-    const col  = i % cols;
-    const row  = Math.floor(i / cols);
-    const jx   = (Math.random() - 0.5) * (section.offsetWidth  / cols) * 0.5;
-    const jy   = (Math.random() - 0.5) * (section.offsetHeight / rows) * 0.5;
-    const cx   = (col + 0.5) * (section.offsetWidth  / cols) + jx;
-    const cy   = (row + 0.5) * (section.offsetHeight / rows) + jy;
+  // build a shuffled sequence long enough
+  let pool = shuffle(SRCS);
+  const seq = [];
+  while (seq.length < N) { pool = shuffle(SRCS); seq.push(...pool); }
+
+  const els = [];
+  for (let i = 0; i < N; i++) {
+    const scale = 0.9 + Math.random() * 1.1;   // 0.9× – 2.0×
+    const base  = 140;
+    const sw    = Math.round(base * scale);
+    const rot   = (Math.random() - 0.5) * 36;
+    const x     = Math.random() * (W + sw * 0.3) - sw * 0.15;
+    const y     = Math.random() * (H + sw * 0.3) - sw * 0.15;
 
     const el = document.createElement('img');
     el.className = 'sticker';
-    el.src = src;
+    el.src = seq[i];
     el.alt = '';
-    el.style.cssText = `
-      width:${size}px; height:${size}px;
-      left:${cx - size / 2}px;
-      top:${cy  - size / 2}px;
-      --rot:${rot}deg;
-    `;
+    el.style.cssText = `width:${sw}px; height:${sw}px; left:${x}px; top:${y}px; --r:${rot}deg;`;
     section.insertBefore(el, ctaCard);
+    els.push(el);
   }
 
-  // GSAP: stickers pop in on scroll, then CTA slides up
-  const tl = gsap.timeline({ paused: true });
-
-  tl.to('.sticker', {
-    scale: 1,
-    opacity: 1,
-    rotation: (i) => STICKERS[i % STICKERS.length].rot,
-    duration: 0.55,
-    ease: 'back.out(1.6)',
-    stagger: 0.06,
-  }).to(ctaCard, {
-    y: 0,
-    opacity: 1,
-    duration: 0.7,
-    ease: 'power3.out',
-  }, '-=0.1');
-
+  // trigger: pop stickers in one by one, then slide CTA up
   ScrollTrigger.create({
     trigger: section,
     start: 'top 75%',
-    onEnter: () => tl.play(),
+    once: true,
+    onEnter() {
+      els.forEach((el, i) => {
+        el.style.animationDuration = '0.6s';
+        el.style.animationDelay   = `${i * 0.045}s`;
+        el.classList.add('popped');
+      });
+      gsap.to(ctaCard, {
+        y: 0, opacity: 1, duration: 0.7, ease: 'power3.out',
+        delay: els.length * 0.045 + 0.1,
+      });
+    },
   });
 })();
 
