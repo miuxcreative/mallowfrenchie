@@ -12,7 +12,7 @@
 <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
 <script>
   /* ── Lenis smooth scroll, wired to GSAP ticker ── */
-  const lenis = new Lenis({ lerp: 0.08, smoothWheel: true });
+  const lenis = new Lenis({ lerp: 0.12, smoothWheel: true });
   lenis.on('scroll', ScrollTrigger.update);
   gsap.ticker.add(time => lenis.raf(time * 1000));
   gsap.ticker.lagSmoothing(0);
@@ -706,8 +706,9 @@
     position: absolute;
     transform: scale(0) rotate(0deg);
     opacity: 0;
-    border-radius: 20px;
     will-change: transform, opacity;
+    object-fit: contain;
+    pointer-events: none;
   }
 
   /* ── CTA CARD ─────────────────────────────────── */
@@ -1410,52 +1411,51 @@
   const section = document.getElementById('sticker-footer');
   const ctaCard = document.getElementById('cta-card');
 
-  // Placeholder sticker configs — swap src for real images later
-  // Shape variants: circle, pill-h, pill-v, rounded-square
-  const STICKERS = [
-    { w: 180, h: 180, r: 20, rot: -14, color: '#f2d0dc' },
-    { w: 220, h: 140, r: 999, rot: 8,  color: '#e6d5b8' },
-    { w: 130, h: 200, r: 999, rot: -6, color: '#c4dde8' },
-    { w: 160, h: 160, r: 999, rot: 22, color: '#f9c8d4' },
-    { w: 240, h: 150, r: 999, rot: -18,color: '#d5e8c4' },
-    { w: 150, h: 150, r: 28,  rot: 11, color: '#e8c4d5' },
-    { w: 200, h: 200, r: 999, rot: -3, color: '#c4c8e8' },
-    { w: 170, h: 110, r: 999, rot: 16, color: '#f2d0dc' },
-    { w: 120, h: 180, r: 999, rot: -25,color: '#e6d5b8' },
-    { w: 260, h: 160, r: 24,  rot: 7,  color: '#c4dde8' },
-    { w: 140, h: 140, r: 999, rot: -12,color: '#f9e0c8' },
-    { w: 190, h: 130, r: 999, rot: 20, color: '#d5c4e8' },
-    { w: 110, h: 170, r: 999, rot: -8, color: '#f2d0dc' },
-    { w: 230, h: 145, r: 999, rot: 14, color: '#c4e8d5' },
-    { w: 155, h: 155, r: 28,  rot: -20,color: '#e8d5c4' },
-    { w: 200, h: 120, r: 999, rot: 5,  color: '#c4dde8' },
-    { w: 175, h: 175, r: 999, rot: -16,color: '#f9c8d4' },
-    { w: 210, h: 135, r: 999, rot: 28, color: '#e6d5b8' },
+  const STICKER_SRCS = [
+    'assets/stickers/Rectangle.png',
+    'assets/stickers/Rectangle-1.png',
+    'assets/stickers/Rectangle-2.png',
+    'assets/stickers/Rectangle-3.png',
+    'assets/stickers/Rectangle-4.png',
+    'assets/stickers/Rectangle-5.png',
+    'assets/stickers/Rectangle-6.png',
+    'assets/stickers/Rectangle-7.png',
+    'assets/stickers/Rectangle-8.png',
+    'assets/stickers/Rectangle-9.png',
+    'assets/stickers/Rectangle-10.png',
+    'assets/stickers/Rectangle-11.png',
   ];
 
-  // Scatter with a simple grid + jitter to guarantee coverage
-  const cols = 5, rows = 4;
-  const cellW = () => section.offsetWidth  / cols;
-  const cellH = () => section.offsetHeight / rows;
+  const ROTATIONS = [-14, 8, -6, 22, -18, 11, -3, 16, -25, 7, -12, 20, -8, 14, -20, 5, -16, 28];
+  const SIZES     = [180, 200, 160, 220, 150, 190, 170, 210, 140, 200, 160, 180];
 
-  STICKERS.forEach((s, i) => {
-    const el = document.createElement('div');
+  // Tile stickers across a grid with jitter so they fill the screen
+  const cols = 4, rows = 3;
+  const N_STICKERS = cols * rows;
+
+  for (let i = 0; i < N_STICKERS; i++) {
+    const src  = STICKER_SRCS[i % STICKER_SRCS.length];
+    const size = SIZES[i % SIZES.length];
+    const rot  = ROTATIONS[i % ROTATIONS.length];
+    const col  = i % cols;
+    const row  = Math.floor(i / cols);
+    const jx   = (Math.random() - 0.5) * (section.offsetWidth  / cols) * 0.5;
+    const jy   = (Math.random() - 0.5) * (section.offsetHeight / rows) * 0.5;
+    const cx   = (col + 0.5) * (section.offsetWidth  / cols) + jx;
+    const cy   = (row + 0.5) * (section.offsetHeight / rows) + jy;
+
+    const el = document.createElement('img');
     el.className = 'sticker';
-    const col = i % cols;
-    const row = Math.floor(i / cols) % rows;
-    // center of cell + jitter
-    const jx = (Math.random() - 0.5) * cellW() * 0.55;
-    const jy = (Math.random() - 0.5) * cellH() * 0.55;
+    el.src = src;
+    el.alt = '';
     el.style.cssText = `
-      width:${s.w}px; height:${s.h}px;
-      border-radius:${s.r}px;
-      background:${s.color};
-      left:${(col + 0.5) * (section.offsetWidth  / cols) + jx - s.w / 2}px;
-      top: ${(row + 0.5) * (section.offsetHeight / rows) + jy - s.h / 2}px;
-      --rot:${s.rot}deg;
+      width:${size}px; height:${size}px;
+      left:${cx - size / 2}px;
+      top:${cy  - size / 2}px;
+      --rot:${rot}deg;
     `;
     section.insertBefore(el, ctaCard);
-  });
+  }
 
   // GSAP: stickers pop in on scroll, then CTA slides up
   const tl = gsap.timeline({ paused: true });
