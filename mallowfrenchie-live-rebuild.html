@@ -719,9 +719,9 @@
   /* ── CTA CARD ─────────────────────────────────── */
   .cta-card {
     position: absolute;
-    bottom: 80px;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%) translateY(120px);
+    transform: translate(-50%, calc(-50% + 60px));
     opacity: 0;
     background: var(--white);
     border-radius: 28px;
@@ -1441,7 +1441,7 @@
 
   const W = section.offsetWidth;
   const H = section.offsetHeight;
-  const N = 72; // dense enough to fully cover background
+  const N = 200;
 
   // build a shuffled sequence long enough
   let pool = shuffle(SRCS);
@@ -1450,8 +1450,8 @@
 
   const els = [];
   for (let i = 0; i < N; i++) {
-    const scale = 0.8 + Math.random() * 1.0;   // 0.8× – 1.8×
-    const base  = 160;
+    const scale = 0.6 + Math.random() * 1.8;   // 0.6× – 2.4×
+    const base  = 180;
     const sw    = Math.round(base * scale);
     const rot   = (Math.random() - 0.5) * 36;
     const x     = Math.random() * (W + sw * 0.4) - sw * 0.2;
@@ -1480,7 +1480,7 @@
         el.classList.add('popped');
       });
       gsap.to(ctaCard, {
-        y: 0, opacity: 1, duration: 0.7, ease: 'power3.out',
+        y: '-50%', opacity: 1, duration: 0.7, ease: 'power3.out',
         delay: els.length * 0.045 + 0.1,
       });
     },
