@@ -617,6 +617,7 @@
     font-weight: 600;
     letter-spacing: 0.06em;
     color: rgba(255,255,255,0.7);
+    background: #111;
   }
 
   /* ── PARTNERSHIPS ─────────────────────────────── */
@@ -1008,7 +1009,9 @@
 
 <!-- Cursor preview -->
 <div id="press-preview">
-  <div class="preview-inner" id="press-preview-label"></div>
+  <div class="preview-inner">
+    <img id="press-preview-img" src="" alt="" style="width:100%;height:100%;object-fit:cover;">
+  </div>
 </div>
 
 <!-- ── PARTNERSHIPS ───────────────────────────────────── -->
@@ -1076,7 +1079,16 @@
 <script>
   /* ── PRESS: cursor-following preview ─────────── */
   const preview     = document.getElementById('press-preview');
-  const previewLabel = document.getElementById('press-preview-label');
+  const previewImg  = document.getElementById('press-preview-img');
+
+  const PREVIEW_IMAGES = {
+    forbes:    'images/CleanShot-2025-03-20-at-19.00.392x.png',
+    deco:      'images/Deco-Drive.png',
+    haute:     'images/haute-living.jpg',
+    adweek:    'images/ADWeek.jpg',
+    newtimes:  'images/CleanShot-2025-03-20-at-19.01.172x.png',
+    resident:  'images/Resident-Magazine.jpg',
+  };
   let mouseX = 0, mouseY = 0;
   let rafId = null;
 
@@ -1094,10 +1106,9 @@
 
   document.querySelectorAll('.press-row[data-preview]').forEach(row => {
     row.addEventListener('mouseenter', () => {
-      const color = row.dataset.color || '#1a1a1a';
-      const pub   = row.querySelector('.press-pub').textContent;
-      preview.querySelector('.preview-inner').style.background = color;
-      previewLabel.textContent = pub;
+      const key = row.dataset.preview;
+      const src = PREVIEW_IMAGES[key];
+      if (src) previewImg.src = src;
       preview.style.left = (mouseX + 20) + 'px';
       preview.style.top  = (mouseY - 90) + 'px';
       preview.classList.add('visible');
