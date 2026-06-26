@@ -284,6 +284,15 @@
     margin: 0 6px -4px;
     transform: scale(0);
     flex-shrink: 0;
+    overflow: hidden;
+    position: relative;
+  }
+  .inline-pill img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   /* Word-split spans for GSAP stagger */
@@ -866,9 +875,9 @@
 <section class="about">
   <p class="about-para" id="about-para">
     I am a <strong>3x Forbes</strong> featured <strong>French Bulldog</strong> in
-    <strong>Miami</strong><span class="inline-pill" style="background:#f2d0dc;"></span>who loves <strong>staycations</strong>, hugs 'n kisses,
-    and being pampered!<span class="inline-pill" style="background:#e6d5b8;"></span>Usually on a quest for snacks, with my happy smile and sweet
-    personality.<span class="inline-pill" style="background:#c4dde8;"></span>I love working with <strong>pet friendly brands</strong> and sharing
+    <strong>Miami</strong><span class="inline-pill"><img src="images/Mallow-Frenchie-on-the-Balcony.png" alt=""></span>who loves <strong>staycations</strong>, hugs 'n kisses,
+    and being pampered!<span class="inline-pill"><img src="images/MallowTheFrenchie_Slide002-copy-1.jpg" alt=""></span>Usually on a quest for snacks, with my happy smile and sweet
+    personality.<span class="inline-pill"><img src="images/marker001_16-copy-4.jpg" alt=""></span>I love working with <strong>pet friendly brands</strong> and sharing
     fun finds with my followers.
   </p>
   <div class="about-stats">
@@ -1085,6 +1094,7 @@
 <section class="sticker-footer" id="sticker-footer">
   <!-- stickers injected by JS -->
   <div class="cta-card" id="cta-card">
+    <img src="images/MallowFrenchieLogoImage.png" alt="Mallow" style="width:90px;height:auto;display:block;margin:0 auto 16px;">
     <p class="cta-card-eyebrow">Let's work together</p>
     <h2>Ready to make something unforgettable?</h2>
     <div class="cta-buttons">
