@@ -666,8 +666,8 @@
     align-items: center;
     justify-content: center;
     padding: 16px 20px;
-    border-right: 1px solid rgba(0,0,0,0.07);
-    border-bottom: 1px solid rgba(0,0,0,0.07);
+    opacity: 0;
+    transform: translateY(12px);
   }
 
   .logo-cell img {
@@ -676,7 +676,7 @@
     width: auto;
     height: auto;
     object-fit: contain;
-    filter: grayscale(1) opacity(0.55);
+    filter: grayscale(1) opacity(0.5);
     transition: filter 0.2s ease;
   }
   .logo-cell img:hover {
@@ -1471,6 +1471,19 @@
     onEnter: () => tl.play(),
   });
 })();
+
+/* ── LOGO GRID stagger ───────────────────────────────── */
+gsap.to('.logo-cell', {
+  opacity: 1,
+  y: 0,
+  duration: 0.5,
+  ease: 'power2.out',
+  stagger: 0.04,
+  scrollTrigger: {
+    trigger: '.logo-grid',
+    start: 'top 85%',
+  }
+});
 </script>
 
 </body>
