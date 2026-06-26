@@ -373,13 +373,17 @@
     /* width + height set by JS */
     flex-shrink: 0;
     overflow: hidden;
+    position: relative;
   }
   .c-card img {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
     pointer-events: none;
+    will-change: transform;
   }
 
   .c-label {
@@ -1298,6 +1302,15 @@
   const waveform = document.getElementById('carousel-waveform');
   const wraps    = [...stage.querySelectorAll('.c-wrap')];
   const N        = wraps.length;
+
+  /* preload all carousel images so they don't pop in during scroll */
+  wraps.forEach(w => {
+    const img = w.querySelector('img');
+    if (img && !img.complete) {
+      const pre = new Image();
+      pre.src = img.src;
+    }
+  });
 
   const BASE_W = 480;
   const BASE_H = wraps.map(w => parseInt(w.querySelector('.c-card').dataset.h));
