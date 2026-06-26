@@ -638,24 +638,35 @@
   }
 
   .logo-grid {
-    display: grid;
-    grid-template-columns: repeat(5, 200px);
-    gap: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
     justify-content: center;
+    align-items: center;
   }
 
   .logo-cell {
-    background: #f0f0f0;
-    border-radius: 8px;
-    height: 72px;
+    width: 160px;
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--ink-light);
-    text-align: center;
-    padding: 0 12px;
+    padding: 16px 20px;
+    border-right: 1px solid rgba(0,0,0,0.07);
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+  }
+
+  .logo-cell img {
+    max-width: 100%;
+    max-height: 44px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    filter: grayscale(1) opacity(0.55);
+    transition: filter 0.2s ease;
+  }
+  .logo-cell img:hover {
+    filter: grayscale(0) opacity(1);
   }
 
   /* ── STICKER FOOTER ──────────────────────────── */
@@ -1004,21 +1015,38 @@
 <section class="partnerships">
   <p class="partnerships-label">Our Partnerships</p>
   <div class="logo-grid">
-    <div class="logo-cell">Miami Marlins</div>
-    <div class="logo-cell">PetSupermarket</div>
-    <div class="logo-cell">Brightline</div>
-    <div class="logo-cell">Amazon</div>
-    <div class="logo-cell">Disney</div>
-    <div class="logo-cell">SOBEWFF</div>
-    <div class="logo-cell">Lull</div>
-    <div class="logo-cell">Palm Beach Boat Show</div>
-    <div class="logo-cell">Bing</div>
-    <div class="logo-cell">BMW</div>
-    <div class="logo-cell">Toyota</div>
-    <div class="logo-cell">MINI</div>
-    <div class="logo-cell">City of Miami</div>
-    <div class="logo-cell">BARK BOX</div>
-    <div class="logo-cell">NutraVet</div>
+    <div class="logo-cell"><img src="assets/logos/Pertnerships_Amazon.png" alt="Amazon"></div>
+    <div class="logo-cell"><img src="assets/logos/Pertnerships_Disney.png" alt="Disney"></div>
+    <div class="logo-cell"><img src="assets/logos/Pertnerships_Auto_Toyota.png" alt="Toyota"></div>
+    <div class="logo-cell"><img src="assets/logos/Pertnerships_Auto_BMW.png" alt="BMW"></div>
+    <div class="logo-cell"><img src="assets/logos/Pertnerships_Mini_BMW.png" alt="MINI"></div>
+    <div class="logo-cell"><img src="assets/logos/Pertnerships_Brightline.png" alt="Brightline"></div>
+    <div class="logo-cell"><img src="assets/logos/Pertnerships_Bing.png" alt="Bing"></div>
+    <div class="logo-cell"><img src="assets/logos/Pertnerships_Mami-Marlins.png" alt="Miami Marlins"></div>
+    <div class="logo-cell"><img src="assets/logos/Pertnerships_SobeWFF.png" alt="SOBEWFF"></div>
+    <div class="logo-cell"><img src="assets/logos/Pertnerships_Lull.png" alt="Lull"></div>
+    <div class="logo-cell"><img src="assets/logos/Pertnerships_PBIBS.png" alt="Palm Beach Boat Show"></div>
+    <div class="logo-cell"><img src="assets/logos/Pertnerships_Natalies.png" alt="Natalie's"></div>
+    <div class="logo-cell"><img src="assets/logos/Pertnerships_Pet_Barkbox.png" alt="BarkBox"></div>
+    <div class="logo-cell"><img src="assets/logos/Pertnerships_Pet_Nutravet.png" alt="NutraVet"></div>
+    <div class="logo-cell"><img src="assets/logos/Pertnerships_Pet_PetSupermarket.png" alt="PetSupermarket"></div>
+    <div class="logo-cell"><img src="assets/logos/Pertnerships_Pet_Wag.png" alt="Wag"></div>
+    <div class="logo-cell"><img src="assets/logos/Pertnerships_Hotel_Epic.png" alt="EPIC"></div>
+    <div class="logo-cell"><img src="assets/logos/Pertnerships_Hotel_Nobu.png" alt="Nobu"></div>
+    <div class="logo-cell"><img src="assets/logos/Pertnerships_Hotel_W.png" alt="W Hotel"></div>
+    <div class="logo-cell"><img src="assets/logos/Pertnerships_Hotel_Hilton.png" alt="Hilton"></div>
+    <div class="logo-cell"><img src="assets/logos/Pertnerships_Hotel_Hyatt.png" alt="Hyatt"></div>
+    <div class="logo-cell"><img src="assets/logos/Pertnerships_Hotel_marriott.png" alt="Marriott"></div>
+    <div class="logo-cell"><img src="assets/logos/Pertnerships_Hotel_Kimpton.png" alt="Kimpton"></div>
+    <div class="logo-cell"><img src="assets/logos/Pertnerships_Hotel_Betsy.png" alt="The Betsy"></div>
+    <div class="logo-cell"><img src="assets/logos/Pertnerships_Hotel_Colonnade.png" alt="Colonnade"></div>
+    <div class="logo-cell"><img src="assets/logos/Pertnerships_Hotel_Eden-Roc.png" alt="Eden Roc"></div>
+    <div class="logo-cell"><img src="assets/logos/Pertnerships_Hotel_Gates.png" alt="The Gates"></div>
+    <div class="logo-cell"><img src="assets/logos/Pertnerships_Hotel_Havan-Cabana.png" alt="Havana Cabana"></div>
+    <div class="logo-cell"><img src="assets/logos/Pertnerships_Hotel_Lido-Beach.png" alt="Lido Beach"></div>
+    <div class="logo-cell"><img src="assets/logos/Pertnerships_Hotel_Tradewinds.png" alt="Tradewinds"></div>
+    <div class="logo-cell"><img src="assets/logos/Pertnerships_Hotel_Hotel-Tonight.png" alt="Hotel Tonight"></div>
+    <div class="logo-cell"><img src="assets/logos/Pertnerships_Hotel_Gates.png" alt="The Gates"></div>
   </div>
 </section>
 
