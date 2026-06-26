@@ -730,7 +730,7 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, calc(-50% + 60px));
+    transform: translate(-50%, -50%);
     opacity: 0;
     background: var(--white);
     border-radius: 28px;
@@ -738,7 +738,7 @@
     text-align: center;
     box-shadow: 0 32px 100px rgba(0,0,0,0.18);
     width: min(520px, 90vw);
-    z-index: 10;
+    z-index: 100;
     will-change: transform, opacity;
   }
 
@@ -1506,10 +1506,10 @@
         el.style.animationDelay   = `${i * 0.012}s`;
         el.classList.add('popped');
       });
-      gsap.to(ctaCard, {
-        y: '-50%', opacity: 1, duration: 0.9, ease: 'power3.out',
-        delay: 0.15,
-      });
+      gsap.fromTo(ctaCard,
+        { y: 40, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.9, ease: 'power3.out', delay: 0.15 }
+      );
     },
   });
 })();
