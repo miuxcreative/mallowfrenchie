@@ -693,7 +693,7 @@
     width: 100%;
     height: 100vh;
     overflow: hidden;
-    background: var(--blush);
+    background: var(--white);
   }
 
   .sticker {
@@ -1496,8 +1496,8 @@
         el.classList.add('popped');
       });
       gsap.to(ctaCard, {
-        y: '-50%', opacity: 1, duration: 0.7, ease: 'power3.out',
-        delay: els.length * 0.045 + 0.1,
+        y: '-50%', opacity: 1, duration: 0.9, ease: 'power3.out',
+        delay: 0.15,
       });
     },
   });
