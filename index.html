@@ -109,7 +109,8 @@
     height: min(72vh, 660px);
     flex-shrink: 0;
     cursor: pointer;
-    z-index: 2; /* sits above the marquee */
+    z-index: 2;
+    overflow: visible;
   }
 
   .card {
@@ -1260,9 +1261,9 @@
     'rotate(-1deg)'
   ];
   const FAN = [
-    'rotate(-15deg) translate(-180px, 10px)',
-    'rotate(0deg) translateY(-10px)',
-    'rotate(15deg) translate(180px, 10px)'
+    'rotate(-22deg) translate(-260px, 20px)',
+    'rotate(0deg) translateY(-20px)',
+    'rotate(22deg) translate(260px, 20px)'
   ];
   const SHADOW_REST = '0 10px 48px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.06)';
   const SHADOW_FAN  = ['0 16px 48px rgba(0,0,0,0.13)', '0 20px 60px rgba(0,0,0,0.15)', '0 16px 48px rgba(0,0,0,0.13)'];
