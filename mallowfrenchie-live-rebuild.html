@@ -12,7 +12,7 @@
 <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
 <script>
   /* ── Lenis smooth scroll, wired to GSAP ticker ── */
-  const lenis = new Lenis({ lerp: 0.12, smoothWheel: true });
+  const lenis = new Lenis({ lerp: 0.10, smoothWheel: true, wheelMultiplier: 1.4, touchMultiplier: 1.8 });
   lenis.on('scroll', ScrollTrigger.update);
   gsap.ticker.add(time => lenis.raf(time * 1000));
   gsap.ticker.lagSmoothing(0);
