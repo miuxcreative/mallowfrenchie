@@ -832,6 +832,23 @@
     color: var(--ink);
   }
 
+  /* ── MOBILE: step 5 — stats ──────────────────────── */
+  @media (max-width: 768px) {
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px 0;
+      margin-top: 64px;
+      justify-items: flex-start;
+    }
+    .stat {
+      padding: 0 24px 0 0;
+      border-right: none;
+      border-bottom: none;
+    }
+    .stat:nth-child(odd)  { border-right: 1px solid rgba(0,0,0,0.10); }
+  }
+
   /* ── MOBILE: step 4 — services + press ──────────── */
   @media (max-width: 768px) {
     .services-grid { grid-template-columns: 1fr; }
