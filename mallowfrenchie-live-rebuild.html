@@ -182,7 +182,14 @@
     position: absolute;
     top: -56px;
     left: 48px;
+    right: 48px;
     z-index: 20;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .hero-corner-left-inner {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -844,6 +851,7 @@
 
   <div class="hero-bottom">
     <div class="hero-corner-left">
+      <div class="hero-corner-left-inner">
       <p>Miami's Favorite Famous Frenchie</p>
       <p class="hero-social">
         <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -854,7 +862,8 @@
         </svg>
         @MallowFrenchie
       </p>
-      <a href="mailto:mallowfrenchie@gmail.com" style="display:inline-block;margin-top:8px;font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink);text-decoration:underline;text-underline-offset:3px;">Contact My Agent</a>
+      </div>
+      <a href="mailto:mallowfrenchie@gmail.com" style="font-size:13px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink);text-decoration:underline;text-underline-offset:4px;">Contact My Agent</a>
     </div>
 
     <div class="marquee-wrap">
