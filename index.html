@@ -832,6 +832,14 @@
     color: var(--ink);
   }
 
+  /* ── MOBILE: step 2 — hero ───────────────────────── */
+  @media (max-width: 768px) {
+    .hero          { height: auto; min-height: 100svh; }
+    .hero-cards    { width: min(320px, 82vw); height: min(60vh, 480px); }
+    .card          { width: calc(min(320px, 82vw) - 40px); height: calc(min(60vh, 480px) - 40px); top: 20px; left: 20px; }
+    .hero-corner-left { top: -44px; }
+  }
+
   /* ── MOBILE: step 1 — global padding ─────────────── */
   @media (max-width: 768px) {
     .hero-nav        { padding: 20px 24px; }
@@ -1278,12 +1286,17 @@
   const container = document.querySelector('.hero-cards');
   const cards     = [...container.querySelectorAll('.card')];
 
+  const isMobile = window.innerWidth <= 768;
   const REST = [
     'rotate(-7deg) translate(-14px, 10px)',
     'rotate(5deg) translate(16px, -6px)',
     'rotate(-1deg)'
   ];
-  const FAN = [
+  const FAN = isMobile ? [
+    'rotate(-18deg) translate(-90px, 16px)',
+    'rotate(0deg) translateY(-16px)',
+    'rotate(18deg) translate(90px, 16px)'
+  ] : [
     'rotate(-22deg) translate(-260px, 20px)',
     'rotate(0deg) translateY(-20px)',
     'rotate(22deg) translate(260px, 20px)'
