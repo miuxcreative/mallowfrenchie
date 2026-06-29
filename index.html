@@ -832,6 +832,19 @@
     color: var(--ink);
   }
 
+  /* ── MOBILE: step 4 — services + press ──────────── */
+  @media (max-width: 768px) {
+    .services-grid { grid-template-columns: 1fr; }
+
+    .press-row {
+      grid-template-columns: 1fr;
+      gap: 8px;
+      padding: 20px 0;
+    }
+    .press-links { align-items: flex-start; }
+    #press-preview { display: none; }
+  }
+
   /* ── MOBILE: step 3 — marquee ────────────────────── */
   @media (max-width: 768px) {
     .marquee-word { font-size: 70px; }
