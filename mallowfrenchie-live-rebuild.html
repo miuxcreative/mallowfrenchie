@@ -768,16 +768,17 @@
   }
 
   .cta-btn-primary {
-    background: var(--pink);
-    color: #fff;
-    padding: 14px 36px;
+    background: #f2d0dc;
+    color: var(--ink);
+    padding: 16px 48px;
     border-radius: 999px;
     font-size: 14px;
     font-weight: 600;
     text-decoration: none;
-    transition: opacity 0.2s;
+    transition: background 0.2s, transform 0.2s;
+    display: inline-block;
   }
-  .cta-btn-primary:hover { opacity: 0.85; }
+  .cta-btn-primary:hover { background: #eabfce; transform: translateY(-2px); }
 
   .cta-btn-secondary {
     background: transparent;
