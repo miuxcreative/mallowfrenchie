@@ -1280,45 +1280,39 @@
     });
   }, 1200);
 
-  let fanned = false;
+  const EASE = 'transform 0.45s cubic-bezier(0.34,1.3,0.64,1), box-shadow 0.45s ease';
 
-  // Step 1: hover container → fan out
-  container.addEventListener('mouseenter', () => {
-    fanned = true;
-    cards.forEach((card, i) => {
-      card.style.transition = 'transform 0.5s cubic-bezier(0.34,1.3,0.64,1), box-shadow 0.5s ease';
-      card.style.transform  = FAN[i];
-      card.style.boxShadow  = SHADOW_FAN[i];
-      card.style.zIndex     = i + 1;
+  function fanAll(activeIdx) {
+    cards.forEach((c, j) => {
+      c.style.transition = EASE;
+      c.style.zIndex     = j === activeIdx ? '10' : String(j + 1);
+      c.style.transform  = j === activeIdx ? `${FAN[j]} scale(1.1)` : FAN[j];
+      c.style.boxShadow  = j === activeIdx ? '0 32px 80px rgba(0,0,0,0.24)' : SHADOW_FAN[j];
     });
-  });
+  }
 
-  container.addEventListener('mouseleave', () => {
-    fanned = false;
-    cards.forEach((card, i) => {
-      card.style.transition = 'transform 0.45s cubic-bezier(0.34,1.3,0.64,1), box-shadow 0.45s ease';
-      card.style.transform  = REST[i];
-      card.style.boxShadow  = SHADOW_REST;
-      card.style.zIndex     = i + 1;
+  function restAll() {
+    cards.forEach((c, j) => {
+      c.style.transition = EASE;
+      c.style.zIndex     = String(j + 1);
+      c.style.transform  = REST[j];
+      c.style.boxShadow  = SHADOW_REST;
     });
-  });
+  }
 
-  // Step 2: hover individual card → lift to front at full size
+  let anyHovered = false;
+
   cards.forEach((card, i) => {
     card.addEventListener('mouseenter', () => {
-      if (!fanned) return;
-      cards.forEach((c, j) => c.style.zIndex = j === i ? '10' : '1');
-      card.style.transition = 'transform 0.35s cubic-bezier(0.34,1.3,0.64,1), box-shadow 0.35s ease';
-      card.style.transform  = `${FAN[i]} scale(1.1)`;
-      card.style.boxShadow  = '0 32px 80px rgba(0,0,0,0.24)';
+      anyHovered = true;
+      fanAll(i);
     });
-
     card.addEventListener('mouseleave', () => {
-      if (!fanned) return;
-      cards.forEach((c, j) => c.style.zIndex = j + 1);
-      card.style.transition = 'transform 0.4s cubic-bezier(0.34,1.3,0.64,1), box-shadow 0.4s ease';
-      card.style.transform  = FAN[i];
-      card.style.boxShadow  = SHADOW_FAN[i];
+      // small delay so moving between cards doesn't collapse
+      setTimeout(() => {
+        if (!anyHovered) restAll();
+      }, 80);
+      anyHovered = false;
     });
   });
 </script>
