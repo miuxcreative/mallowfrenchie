@@ -1435,9 +1435,9 @@
     }
   });
 
-  const BASE_W = 480;
+  const BASE_W = Math.min(480, window.innerWidth * 0.82);
   const BASE_H = wraps.map(w => parseInt(w.querySelector('.c-card').dataset.h));
-  const GAP    = 22;
+  const GAP    = isMobile ? 12 : 22;
 
   function scaleFor(dist) {
     return Math.max(0.055, Math.pow(0.55, Math.abs(dist)));
