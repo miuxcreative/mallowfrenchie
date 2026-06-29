@@ -832,6 +832,29 @@
     color: var(--ink);
   }
 
+  /* ── MOBILE: step 6 — logo grid ─────────────────── */
+  .logo-view-more { display: none; }
+
+  @media (max-width: 768px) {
+    .logo-more { display: none; }
+    .logo-cell { width: 100px; height: 64px; padding: 10px 12px; }
+    .logo-view-more {
+      display: block;
+      margin-top: 28px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      padding: 0;
+    }
+  }
+
   /* ── MOBILE: step 5 — stats ──────────────────────── */
   @media (max-width: 768px) {
     .about-stats {
@@ -1139,23 +1162,27 @@
     <div class="logo-cell"><img src="assets/logos/Pertnerships_Pet_Nutravet.png" alt="NutraVet"></div>
     <div class="logo-cell"><img src="assets/logos/Pertnerships_Pet_PetSupermarket.png" alt="PetSupermarket"></div>
     <div class="logo-cell"><img src="assets/logos/Pertnerships_Pet_Wag.png" alt="Wag"></div>
-    <div class="logo-cell"><img src="assets/logos/Pertnerships_Hotel_Epic.png" alt="EPIC"></div>
-    <div class="logo-cell"><img src="assets/logos/Pertnerships_Hotel_Nobu.png" alt="Nobu"></div>
-    <div class="logo-cell"><img src="assets/logos/Pertnerships_Hotel_W.png" alt="W Hotel"></div>
-    <div class="logo-cell"><img src="assets/logos/Pertnerships_Hotel_Hilton.png" alt="Hilton"></div>
-    <div class="logo-cell"><img src="assets/logos/Pertnerships_Hotel_Hyatt.png" alt="Hyatt"></div>
-    <div class="logo-cell"><img src="assets/logos/Pertnerships_Hotel_marriott.png" alt="Marriott"></div>
-    <div class="logo-cell"><img src="assets/logos/Pertnerships_Hotel_Kimpton.png" alt="Kimpton"></div>
-    <div class="logo-cell"><img src="assets/logos/Pertnerships_Hotel_Betsy.png" alt="The Betsy"></div>
-    <div class="logo-cell"><img src="assets/logos/Pertnerships_Hotel_Colonnade.png" alt="Colonnade"></div>
-    <div class="logo-cell"><img src="assets/logos/Pertnerships_Hotel_Eden-Roc.png" alt="Eden Roc"></div>
-    <div class="logo-cell"><img src="assets/logos/Pertnerships_Hotel_Gates.png" alt="The Gates"></div>
-    <div class="logo-cell"><img src="assets/logos/Pertnerships_Hotel_Havan-Cabana.png" alt="Havana Cabana"></div>
-    <div class="logo-cell"><img src="assets/logos/Pertnerships_Hotel_Lido-Beach.png" alt="Lido Beach"></div>
-    <div class="logo-cell"><img src="assets/logos/Pertnerships_Hotel_Tradewinds.png" alt="Tradewinds"></div>
-    <div class="logo-cell"><img src="assets/logos/Pertnerships_Hotel_Hotel-Tonight.png" alt="Hotel Tonight"></div>
-    <div class="logo-cell"><img src="assets/logos/Pertnerships_Hotel_Gates.png" alt="The Gates"></div>
+    <div class="logo-cell logo-more"><img src="assets/logos/Pertnerships_Hotel_Epic.png" alt="EPIC"></div>
+    <div class="logo-cell logo-more"><img src="assets/logos/Pertnerships_Hotel_Nobu.png" alt="Nobu"></div>
+    <div class="logo-cell logo-more"><img src="assets/logos/Pertnerships_Hotel_W.png" alt="W Hotel"></div>
+    <div class="logo-cell logo-more"><img src="assets/logos/Pertnerships_Hotel_Hilton.png" alt="Hilton"></div>
+    <div class="logo-cell logo-more"><img src="assets/logos/Pertnerships_Hotel_Hyatt.png" alt="Hyatt"></div>
+    <div class="logo-cell logo-more"><img src="assets/logos/Pertnerships_Hotel_marriott.png" alt="Marriott"></div>
+    <div class="logo-cell logo-more"><img src="assets/logos/Pertnerships_Hotel_Kimpton.png" alt="Kimpton"></div>
+    <div class="logo-cell logo-more"><img src="assets/logos/Pertnerships_Hotel_Betsy.png" alt="The Betsy"></div>
+    <div class="logo-cell logo-more"><img src="assets/logos/Pertnerships_Hotel_Colonnade.png" alt="Colonnade"></div>
+    <div class="logo-cell logo-more"><img src="assets/logos/Pertnerships_Hotel_Eden-Roc.png" alt="Eden Roc"></div>
+    <div class="logo-cell logo-more"><img src="assets/logos/Pertnerships_Hotel_Gates.png" alt="The Gates"></div>
+    <div class="logo-cell logo-more"><img src="assets/logos/Pertnerships_Hotel_Havan-Cabana.png" alt="Havana Cabana"></div>
+    <div class="logo-cell logo-more"><img src="assets/logos/Pertnerships_Hotel_Lido-Beach.png" alt="Lido Beach"></div>
+    <div class="logo-cell logo-more"><img src="assets/logos/Pertnerships_Hotel_Tradewinds.png" alt="Tradewinds"></div>
+    <div class="logo-cell logo-more"><img src="assets/logos/Pertnerships_Hotel_Hotel-Tonight.png" alt="Hotel Tonight"></div>
+    <div class="logo-cell logo-more"><img src="assets/logos/Pertnerships_Hotel_Gates.png" alt="The Gates"></div>
   </div>
+  <button class="logo-view-more" id="logo-view-more" onclick="
+    document.querySelectorAll('.logo-more').forEach(el => el.style.display = 'flex');
+    this.style.display = 'none';
+  ">View all partners</button>
 </section>
 
 <!-- ── STICKER FOOTER ─────────────────────────────────── -->
