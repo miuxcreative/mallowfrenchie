@@ -175,6 +175,7 @@
     transform: translateY(-50%);
     left: 0;
     right: 0;
+    height: clamp(120px, 14vw, 190px);
     z-index: 10;
   }
 
@@ -414,6 +415,7 @@
   }
 
   .c-label {
+    display: none;
     margin-top: 12px;
     white-space: nowrap;
     font-size: 11px;
@@ -423,7 +425,7 @@
     overflow: hidden;
   }
   .c-label-name { font-weight: 700; color: var(--ink); margin-right: 7px; }
-  .c-label-desc { display: none; font-weight: 400; color: var(--ink-mid); }
+  .c-label-desc { font-weight: 400; color: var(--ink-mid); }
 
   /* waveform indicator */
   .carousel-waveform {
