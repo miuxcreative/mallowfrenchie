@@ -224,8 +224,12 @@
     overflow: hidden;
     line-height: 1;
     user-select: none;
-    position: relative;
-    z-index: 1;
+    position: absolute;
+    top: 65%;
+    transform: translateY(-50%);
+    left: 0;
+    right: 0;
+    z-index: 0;
   }
 
   .marquee-track {
@@ -419,7 +423,7 @@
     overflow: hidden;
   }
   .c-label-name { font-weight: 700; color: var(--ink); margin-right: 7px; }
-  .c-label-desc { font-weight: 400; color: var(--ink-mid); }
+  .c-label-desc { display: none; font-weight: 400; color: var(--ink-mid); }
 
   /* waveform indicator */
   .carousel-waveform {
@@ -749,8 +753,15 @@
     text-align: center;
     box-shadow: 0 32px 100px rgba(0,0,0,0.18);
     width: min(520px, 90vw);
+    max-height: 90vh;
+    overflow-y: auto;
     z-index: 100;
     will-change: transform, opacity;
+  }
+
+  @media (max-height: 700px) {
+    .cta-card { padding: 32px 40px; }
+    .cta-card h2 { margin-bottom: 20px; }
   }
 
   .cta-card-eyebrow {
@@ -1003,18 +1014,18 @@
       </div>
       <a href="mailto:mallowfrenchie@gmail.com" style="font-size:13px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink);text-decoration:underline;text-underline-offset:4px;">Contact My Agent</a>
     </div>
+  </div>
 
-    <div class="marquee-wrap">
-      <div class="marquee-track">
-        <!-- duplicated for seamless loop -->
-        <div class="marquee-item">
-          <span class="marquee-word">MIAMI'S #1 FRENCHIE</span>
-          <span class="marquee-dot">·</span>
-        </div>
-        <div class="marquee-item">
-          <span class="marquee-word">MIAMI'S #1 FRENCHIE</span>
-          <span class="marquee-dot">·</span>
-        </div>
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <!-- duplicated for seamless loop -->
+      <div class="marquee-item">
+        <span class="marquee-word">MIAMI'S #1 FRENCHIE</span>
+        <span class="marquee-dot">·</span>
+      </div>
+      <div class="marquee-item">
+        <span class="marquee-word">MIAMI'S #1 FRENCHIE</span>
+        <span class="marquee-dot">·</span>
       </div>
     </div>
   </div>
